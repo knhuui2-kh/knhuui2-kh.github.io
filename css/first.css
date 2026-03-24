@@ -1623,9 +1623,9 @@ ul.list-v >li>a:hover {
     background: var(--color-site-bg) !important;
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Long+Cang&display=swap&text=爱你的明媚也破碎，。");
+@import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap");
 .cover-wrapper .cover-body .title {
-  background: linear-gradient(90deg, #1a7a9c, #2193b0, #4db8d4, #6dd5ed, #4db8d4, #2193b0, #1a7a9c);
+  background: linear-gradient(90deg, #5eb8c4, #7eccd4, #9edce4, #7eccd4, #5eb8c4);
   background-size: 200% 100%;
   -webkit-background-size: 200% 100%;
   -moz-background-size: 200% 100%;
@@ -1640,19 +1640,20 @@ ul.list-v >li>a:hover {
   -ms-animation: gradient-flow 3s linear infinite;
 }
 .cover-wrapper .cover-body .subtitle {
-  font-family: 'Long Cang', cursive;
-  font-size: 1.5rem;
-  color: #7ab8d4;
+  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive;
+  font-size: 1.6rem;
+  color: #39c5bb;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 3px solid #7ab8d4;
-  animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  -webkit-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  -khtml-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  -moz-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  -o-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  -ms-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
-  letter-spacing: 2px;
+  border-right: 3px solid #39c5bb;
+  animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  -webkit-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  -khtml-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  -moz-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  -o-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  -ms-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
+  letter-spacing: 3px;
+  text-shadow: 0 0 8px rgba(57,197,187,0.3);
 }
 .cover-wrapper .bottom .menu .list-h a {
   color: #444;
@@ -1662,11 +1663,11 @@ ul.list-v >li>a:hover {
 }
 .cover-wrapper .bottom .menu .list-h a:hover,
 .cover-wrapper .bottom .menu .list-h a.active {
-  color: #2193b0;
+  color: #39c5bb;
 }
 .cover-wrapper .bottom .menu .list-h a:hover p,
 .cover-wrapper .bottom .menu .list-h a.active p {
-  color: #2193b0;
+  color: #39c5bb;
 }
 .cover-wrapper .bottom .m_search .input {
   color: #333;
@@ -1675,14 +1676,12 @@ ul.list-v >li>a:hover {
   color: #888;
 }
 @media (max-width: 768px) {
+  .parallax-slider {
+    object-position: right center !important;
+    object-fit: cover !important;
+  }
   .parallax-mirror {
-    background-position: right center !important;
-  }
-  .cover-wrapper {
-    background-position: right center !important;
-  }
-  .cover-wrapper #parallax-window {
-    background-position: right center !important;
+    overflow: hidden;
   }
 }
 @-moz-keyframes gradient-flow {
@@ -1721,10 +1720,10 @@ ul.list-v >li>a:hover {
   0% {
     width: 0;
   }
-  40% {
+  33% {
     width: 12em;
   }
-  60% {
+  58% {
     width: 12em;
   }
   100% {
@@ -1735,10 +1734,10 @@ ul.list-v >li>a:hover {
   0% {
     width: 0;
   }
-  40% {
+  33% {
     width: 12em;
   }
-  60% {
+  58% {
     width: 12em;
   }
   100% {
@@ -1749,10 +1748,10 @@ ul.list-v >li>a:hover {
   0% {
     width: 0;
   }
-  40% {
+  33% {
     width: 12em;
   }
-  60% {
+  58% {
     width: 12em;
   }
   100% {
@@ -1763,10 +1762,10 @@ ul.list-v >li>a:hover {
   0% {
     width: 0;
   }
-  40% {
+  33% {
     width: 12em;
   }
-  60% {
+  58% {
     width: 12em;
   }
   100% {
@@ -1778,7 +1777,7 @@ ul.list-v >li>a:hover {
     border-color: transparent;
   }
   50% {
-    border-color: #7ab8d4;
+    border-color: #39c5bb;
   }
 }
 @-webkit-keyframes blink-caret {
@@ -1786,7 +1785,7 @@ ul.list-v >li>a:hover {
     border-color: transparent;
   }
   50% {
-    border-color: #7ab8d4;
+    border-color: #39c5bb;
   }
 }
 @-o-keyframes blink-caret {
@@ -1794,7 +1793,7 @@ ul.list-v >li>a:hover {
     border-color: transparent;
   }
   50% {
-    border-color: #7ab8d4;
+    border-color: #39c5bb;
   }
 }
 @keyframes blink-caret {
@@ -1802,6 +1801,6 @@ ul.list-v >li>a:hover {
     border-color: transparent;
   }
   50% {
-    border-color: #7ab8d4;
+    border-color: #39c5bb;
   }
 }
