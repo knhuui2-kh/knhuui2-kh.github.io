@@ -1623,3 +1623,18 @@ ul.list-v >li>a:hover {
     background: var(--color-site-bg) !important;
   }
 }
+.cover-wrapper .cover-body .title {
+  background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+  -webkit-background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cover-wrapper .navbar .navbar-content .main a {
+  color: #333;
+}
+.cover-wrapper .navbar .navbar-content .main a:hover {
+  color: #2193b0;
+}
+.cover-wrapper .navbar .navbar-content .search input {
+  color: #333;
+}
