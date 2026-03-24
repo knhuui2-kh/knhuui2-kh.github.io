@@ -1702,18 +1702,18 @@ ul.list-v >li>a:hover {
 }
 .cover-wrapper .cover-body .subtitle {
   font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive;
-  font-size: 1.6rem;
+  font-size: 20px;
   color: #39c5bb;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 3px solid #39c5bb;
+  border-right: 2px solid #39c5bb;
   animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
   -webkit-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
   -khtml-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
   -moz-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
   -o-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
   -ms-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  letter-spacing: 3px;
+  letter-spacing: normal;
   text-shadow: 0 0 8px rgba(57,197,187,0.3);
 }
 .cover-wrapper .bottom .menu .list-h a {
@@ -1738,11 +1738,20 @@ ul.list-v >li>a:hover {
 }
 @media (max-width: 768px) {
   .parallax-slider {
-    object-position: right center !important;
-    object-fit: cover !important;
-  }
-  .parallax-mirror {
-    overflow: hidden;
+    transform: none !important;
+    -webkit-transform: none !important;
+    -khtml-transform: none !important;
+    -moz-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    height: 100% !important;
+    width: auto !important;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: right center;
   }
 }
 @-moz-keyframes gradient-flow {
@@ -2453,7 +2462,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1774343336869),
+    lastupdate: new Date(1774343872590),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
@@ -4180,6 +4189,7 @@ const performanceMonitor = {
       
     </div>
     <!-- import body_end begin-->
+        <script>if(window.innerWidth<=768){var _origRenderItem=Parallax.renderItem;Parallax.renderItem=function(mirror,slider){_origRenderItem(mirror,slider);slider.style.transform="translate3d(0px, "+Parallax.options.offsetTop+"px, 0px)"}}</script>
     <!-- import body_end end-->
     <!-- Custom Files bodyEnd begin-->
     
