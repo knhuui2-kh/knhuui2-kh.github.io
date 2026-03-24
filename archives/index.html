@@ -1684,20 +1684,187 @@ ul.list-v >li>a:hover {
     background: var(--color-site-bg) !important;
   }
 }
+@import url("https://fonts.googleapis.com/css2?family=Long+Cang&display=swap&text=爱你的明媚也破碎，。");
 .cover-wrapper .cover-body .title {
-  background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+  background: linear-gradient(90deg, #1a7a9c, #2193b0, #4db8d4, #6dd5ed, #4db8d4, #2193b0, #1a7a9c);
+  background-size: 200% 100%;
+  -webkit-background-size: 200% 100%;
+  -moz-background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradient-flow 3s linear infinite;
+  -webkit-animation: gradient-flow 3s linear infinite;
+  -khtml-animation: gradient-flow 3s linear infinite;
+  -moz-animation: gradient-flow 3s linear infinite;
+  -o-animation: gradient-flow 3s linear infinite;
+  -ms-animation: gradient-flow 3s linear infinite;
 }
-.cover-wrapper .navbar .navbar-content .main a {
-  color: #333;
+.cover-wrapper .cover-body .subtitle {
+  font-family: 'Long Cang', cursive;
+  font-size: 1.5rem;
+  color: #7ab8d4;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #7ab8d4;
+  animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  -webkit-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  -khtml-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  -moz-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  -o-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  -ms-animation: typing 10s steps(12) infinite, blink-caret 0.6s step-end infinite;
+  letter-spacing: 2px;
 }
-.cover-wrapper .navbar .navbar-content .main a:hover {
+.cover-wrapper .bottom .menu .list-h a {
+  color: #444;
+}
+.cover-wrapper .bottom .menu .list-h a p {
+  color: #444;
+}
+.cover-wrapper .bottom .menu .list-h a:hover,
+.cover-wrapper .bottom .menu .list-h a.active {
   color: #2193b0;
 }
-.cover-wrapper .navbar .navbar-content .search input {
+.cover-wrapper .bottom .menu .list-h a:hover p,
+.cover-wrapper .bottom .menu .list-h a.active p {
+  color: #2193b0;
+}
+.cover-wrapper .bottom .m_search .input {
   color: #333;
+}
+.cover-wrapper .bottom .m_search .input::placeholder {
+  color: #888;
+}
+@media (max-width: 768px) {
+  .parallax-mirror {
+    background-position: right center !important;
+  }
+  .cover-wrapper {
+    background-position: right center !important;
+  }
+  .cover-wrapper #parallax-window {
+    background-position: right center !important;
+  }
+}
+@-moz-keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@-webkit-keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@-o-keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@-moz-keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 12em;
+  }
+  60% {
+    width: 12em;
+  }
+  100% {
+    width: 0;
+  }
+}
+@-webkit-keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 12em;
+  }
+  60% {
+    width: 12em;
+  }
+  100% {
+    width: 0;
+  }
+}
+@-o-keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 12em;
+  }
+  60% {
+    width: 12em;
+  }
+  100% {
+    width: 0;
+  }
+}
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 12em;
+  }
+  60% {
+    width: 12em;
+  }
+  100% {
+    width: 0;
+  }
+}
+@-moz-keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7ab8d4;
+  }
+}
+@-webkit-keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7ab8d4;
+  }
+}
+@-o-keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7ab8d4;
+  }
+}
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #7ab8d4;
+  }
 }
 
   </style>
@@ -2287,7 +2454,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1774340164758),
+    lastupdate: new Date(1774342535832),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
