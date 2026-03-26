@@ -1651,6 +1651,14 @@ ul.list-v >li>a:hover {
 #post-body > h1:first-child {
   margin-top: 0 !important;
 }
+#waifu {
+  left: auto !important;
+  right: 0 !important;
+}
+#waifu-toggle {
+  left: auto !important;
+  right: 0 !important;
+}
 .cover-wrapper .bottom .menu .list-h a {
   color: #444;
 }
