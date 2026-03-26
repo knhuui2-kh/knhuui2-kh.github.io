@@ -1702,20 +1702,12 @@ ul.list-v >li>a:hover {
   -ms-animation: gradient-flow 3s linear infinite;
 }
 .cover-wrapper .cover-body .subtitle {
-  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive;
-  font-size: 20px;
-  color: #39c5bb;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #39c5bb;
-  animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  -webkit-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  -khtml-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  -moz-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  -o-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  -ms-animation: typing 6s steps(12) infinite, blink-caret 0.5s step-end infinite;
-  letter-spacing: normal;
-  text-shadow: 0 0 8px rgba(57,197,187,0.3);
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+.article #post-body > *:first-child {
+  margin-top: 0 !important;
 }
 .cover-wrapper .bottom .menu .list-h a {
   color: #444;
@@ -2468,7 +2460,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1774491976135),
+    lastupdate: new Date(1774492805743),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
