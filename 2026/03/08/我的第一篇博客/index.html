@@ -1687,7 +1687,7 @@ ul.list-v >li>a:hover {
     background: var(--color-site-bg) !important;
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap");
+@import url("https://fonts.font.im/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap");
 .cover-wrapper .cover-body .title {
   background: linear-gradient(90deg, #5eb8c4, #7eccd4, #9edce4, #7eccd4, #5eb8c4);
   background-size: 200% 100%;
@@ -1755,6 +1755,11 @@ ul.list-v >li>a:hover {
     min-width: 100%;
     object-fit: cover;
     object-position: right center;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none !important;
   }
 }
 @-moz-keyframes gradient-flow {
@@ -2465,7 +2470,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1774344152728),
+    lastupdate: new Date(1774491357207),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
