@@ -1708,22 +1708,24 @@ ul.list-v >li>a:hover {
   padding-bottom: 0 !important;
 }
 .article h1 {
-  margin-top: 16px !important;
-  margin-bottom: 0.3rem !important;
+  margin-top: 8px !important;
+  margin-bottom: 0.2rem !important;
 }
 .article h2 {
-  margin-top: 12px !important;
-  margin-bottom: 0.3rem !important;
+  margin-top: 6px !important;
+  margin-bottom: 0.2rem !important;
 }
 .article h3 {
-  margin-top: 10px !important;
+  margin-top: 4px !important;
+  margin-bottom: 0.1rem !important;
 }
 .article h4 {
-  margin-top: 8px !important;
+  margin-top: 4px !important;
+  margin-bottom: 0.1rem !important;
 }
 .article p {
-  margin-top: 0.6em !important;
-  margin-bottom: 0.6em !important;
+  margin-top: 0.4em !important;
+  margin-bottom: 0.4em !important;
 }
 #s-top {
   position: fixed !important;
