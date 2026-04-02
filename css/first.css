@@ -1714,6 +1714,19 @@ ul.list-v >li>a:hover {
 .article h2 {
   margin-top: 6px !important;
 }
+
+.article h1 + h2 {
+  margin-top: 2px !important;
+}
+.md h1:before,
+.md h2:before,
+.md h3:before,
+.md h4:before,
+.md h5:before,
+.md h6:before {
+  height: 32px !important;
+  margin-top: -32px !important;
+}
 .article h3 {
   margin-top: 4px !important;
   margin-bottom: 0 !important;
