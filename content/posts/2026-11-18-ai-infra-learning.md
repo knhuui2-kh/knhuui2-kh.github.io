@@ -43,14 +43,14 @@ print(deep)  # [[3], [9]]
 
 ``` Python
 def collect_bad(x: int, result: list[int] = []) -> list[int]:
- result.append(x)
- return result
+    result.append(x)
+    return result
  
 def collect_good(x: int, result: list[int] | None = None) - > list[int]:
- if result is None:
-  result = []
- result.append(x)
- return result
+    if result is None:
+    result = []
+    result.append(x)
+    return result
 ```
 
 接下来，调用它们：
@@ -92,19 +92,19 @@ P = ParamSpec("P")
 R = TypeVar("R")
 
 def timed(fn： Callable[P， R]) -> Callable[P, R]:
- @wraps(fn)
- def wrapper(*args: P.args, **kwargs:P.kwargs) -> R:
-  start = perf_counter()
-  try:
-   return fn(*args, **kwargs)
-  finally:
-   elapsed_ms = (perf_counter() - start) * 1_000
-   print(f"{fn.__name__}:{elapsed_ms:.3f} ms")
- return wrapper
+    @wraps(fn)
+    def wrapper(*args: P.args, **kwargs:P.kwargs) -> R:
+        start = perf_counter()
+        try:
+            return fn(*args, **kwargs)
+        finally:
+            elapsed_ms = (perf_counter() - start) * 1_000
+            print(f"{fn.__name__}:{elapsed_ms:.3f} ms")
+    return wrapper
  
 @timed
 def preprocess(values: list[float]) -> list[float]:
- return [value * 2 for vaule in values]
+    return [value * 2 for vaule in values]
 ```
 
 `@timed` 相当于 `preprocess = timed(preprocess)` ，由于 timed 返回一个 `wrapper` 函数，因此实际上 `preprocess` 函数被 `wrapper` 函数所“代理”。
@@ -120,15 +120,15 @@ from time import perf_counter
 
 @contextmanager
 def timer(name: str) -> Iterator[None]:
- start = perf_counter
- try:
-  yield
- finally:
+    start = perf_counter
+    try:
+        yield
+    finally:
         elapsed_ms = (perf_counter() - start) * 1_000
         print(f"{name}: {elapsed_ms:.3f} ms")
 
 with timer("load data"):
- data = [value for value in range(100_000)]
+    data = [value for value in range(100_000)]
 ```
 
 `@contextmanager` 函数可以实现一个生成器函数（有 `yield` 的函数）的上下文管理协议（`__enter__` 和 `__exit__` 方法），从而被 `with` 操作，使用 `with` 能把资源的获取和释放放在同一个语法词块内，即使发生异常，也能执行清理。
@@ -168,12 +168,12 @@ for _ in range(10):
     _ = model(input)
 
 for rep in range(repetitions):
- starter.record()
- _ = model(input)
- ender.record()
+    starter.record()
+    _ = model(input)
+    ender.record()
 
- # wait for GPU sync
- torch.cuda.synchronize() # 示例中都放到了循环内
+    # wait for GPU sync
+    torch.cuda.synchronize() # 示例中都放到了循环内
 ```
 
 ## 区分 C++ 指针、引用、值和 `const` 引用的接口语义
@@ -184,15 +184,15 @@ for rep in range(repetitions):
 #include <iostream>
 
 int main() {
- int value = 10;
+    int value = 10;
 
- int* ptr = &value;
- int& ref = value;  // 引用，指向同一块内存，ref 是 value 的别名
+    int* ptr = &value;
+    int& ref = value;  // 引用，指向同一块内存，ref 是 value 的别名
 
- *ptr = 9;  
- ref += 1; 
+    *ptr = 9;  
+    ref += 1; 
 
- std::cout << value << '\n';  // value = 10
+    std::cout << value << '\n';  // value = 10
 }
 
 ```
