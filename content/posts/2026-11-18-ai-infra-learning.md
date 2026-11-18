@@ -48,9 +48,9 @@ def collect_bad(x: int, result: list[int] = []) -> list[int]:
  
 def collect_good(x: int, result: list[int] | None = None) - > list[int]:
     if result is None:
-    result = []
-    result.append(x)
-    return result
+        result = []
+        result.append(x)
+        return result
 ```
 
 接下来，调用它们：
@@ -162,7 +162,7 @@ Guide 中是这样描述的：
 
 但是 pytorch 文档中给出的示例确是相同的，这可能是工程和理论的差距。
 
-```
+``` Python
 # GPU-Warmup
 for _ in range(10):
     _ = model(input)
