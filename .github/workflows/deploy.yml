@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # 也可以在 Actions 页面手动点一下重发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout(含子模块)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive   # 主题 themes/archie-zola 是 submodule
+
+      - name: Install Zola 0.23.6
+        run: |
+          curl -sSfL https://github.com/getzola/zola/releases/download/v0.23.6/zola-v0.23.6-x86_64-unknown-linux-gnu.tar.gz \
+            | sudo tar xz -C /usr/local/bin zola
+          zola --version
+
+      - name: Build
+        run: zola build          # base_url 取自 zola.toml
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
