@@ -1,0 +1,52 @@
+base_url = "http://127.0.0.1:1111"
+title = "knhuui2-kh"
+description = ""
+default_language = "zh"
+theme = "archie-zola"
+
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+taxonomies = [{ name = "tags" }]
+
+[markdown]
+smart_punctuation = false
+
+[markdown.highlighting]
+theme = "one-light"
+style = "inline"
+
+[extra]
+mode = "toggle"
+useCDN = false
+favicon = "/icon/favicon.png"
+copyright = ""
+ga = ""
+katex_enable = true
+custom_css = []
+custom_js = []
+
+# social = [{ icon = "github", name = "GitHub", url = "https://github.com/you" }]
+social = [{ icon = "github", name = "knhuui2-kh", url = "https://github.com/knhuui2-kh"}]
+
+[extra.translations]
+languages = []
+
+[[extra.translations.zh]]
+show_more = "Read more ⟶"
+previous_page = "← 上一页"
+next_page = "下一页 →"
+posted_on = "on "
+posted_by = "作者"
+read_time = "minute read"
+all_tags = "全部标签"
+
+menus = [
+    { name = "主页", url = "/", weight = 1 },
+    { name = "文章", url = "/posts", weight = 2 },
+    { name = "关于", url = "/about", weight = 3 },
+    { name = "标签", url = "/tags", weight = 4 },
+    { name = "RSS", url = "/atom.xml", weight = 5 },
+]

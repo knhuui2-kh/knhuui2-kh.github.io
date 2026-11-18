@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block main_content %}
+    {% if paginator %}
+        {% set show_pages = paginator.pages %}
+    {% elif section %}
+        {% set show_pages = section.pages %}
+    {% else %}
+        {% set posts_section = get_section(path="posts/_index.md", lang=lang, allow_missing=true) %}
+        {% set show_pages = posts_section?.pages or [] %}
+    {% endif %}
+
+    <h1 class="page-title">所有文章</h1>
+
+    <ul class="posts">
+        {% for page in show_pages %}
+            <li class="post">
+                <a href="{{ page.permalink }}">{{ page.title or "" }}</a>
+                {% if page.date %}<span class="meta">{{ page.date | date(format="%Y-%m-%d") }}</span>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {{<archie.pagination paginator={paginator or false} extra={config.extra} lang />}}
+{% endblock main_content %}

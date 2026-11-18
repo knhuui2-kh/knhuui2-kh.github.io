@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block main_content %}
+    <h1 class="page-title">全部标签</h1>
+
+    <div class="tag-cloud">
+        <ul class="tags">
+            {% for term in terms %}
+            <li>
+                <a href="{{ term.permalink }}">
+                    {{ term.name }} ({{ term.pages | length }} 篇)
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock main_content %}
