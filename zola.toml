@@ -21,7 +21,7 @@ style = "inline"
 [extra]
 mode = "toggle"
 useCDN = false
-favicon = ""            # 留空 = 不输出 <link rel="icon">(主题 theme.toml 默认会补一个,必须显式覆盖)
+favicon = ""
 copyright = ""
 ga = ""
 katex_enable = true
