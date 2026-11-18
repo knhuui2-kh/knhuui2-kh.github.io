@@ -13,7 +13,7 @@ tags = ["ai-infra-learning"]
 
 a is b 代表 a 和 b 指向同一个对象（内存），a == b 则仅代表二者的值相等，例如：
 
-```
+``` Python
 a = [1, 2]
 b = a
 b.append(3)
@@ -25,7 +25,7 @@ print(a == b) # True: 值相等
 
 浅拷贝仅复制外层，深拷贝则递归复制，复制即意味着开辟了新的内存，不再指向原来的对象，但是存储着相同的值，例如：
 
-```
+``` Python
 import copy
 
 src = [[3], [9]]
@@ -41,7 +41,7 @@ print(deep)  # [[3], [9]]
 
 以下面的例子说明：
 
-```
+``` Python
 def collect_bad(x: int, result: list[int] = []) -> list[int]:
  result.append(x)
  return result
@@ -55,7 +55,7 @@ def collect_good(x: int, result: list[int] | None = None) - > list[int]:
 
 接下来，调用它们：
 
-```
+``` Python
 collect(3)
 collect(9)
 collect(39)
@@ -82,7 +82,7 @@ print(result)
 
 一个保留原函数的计时器装饰器代码如下（使用 functools 库中的 @wraps 装饰器）：
 
-```
+``` Python
 from functools import wraps
 from time import perf_counter
 from collections.abc import Callable
@@ -113,7 +113,7 @@ def preprocess(values: list[float]) -> list[float]:
 
 一个上下文管理器（使用 @contextmanager 装饰器将函数对象变成可被 with 操作的对象）：
 
-```
+``` Python
 from contextlib import contextmanager
 from collections.abc import Iterator
 from time import perf_counter
@@ -180,7 +180,7 @@ for rep in range(repetitions):
 
 ### 指针、引用、值
 
-```
+``` Cpp
 #include <iostream>
 
 int main() {
@@ -199,7 +199,7 @@ int main() {
 
 ### const 引用的接口语义
 
-```
+``` Cpp
 void consume(T value);  // 按值：函数获得自己的变量，适合小型标量
 void update(T& value);  // 可变借用：函数会修改调用方
 void inspect(const T& value);  // 只读借用：避免复制 <- 这里，const 引用的接口语义
