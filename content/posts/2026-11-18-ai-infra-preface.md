@@ -4,7 +4,7 @@ date = 2026-11-18
 description = "Python；Cpp；Python 与 Cpp 互操作；Linux 开发；环境隔离与软件栈；Git；问题定位"
 
 [taxonomies]
-tags = [“ai-infra-learning”]
+tags = ["ai-infra-learning"]
 +++
 
 # 验收
