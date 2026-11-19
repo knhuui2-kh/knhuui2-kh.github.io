@@ -49,8 +49,8 @@ def collect_bad(x: int, result: list[int] = []) -> list[int]:
 def collect_good(x: int, result: list[int] | None = None) - > list[int]:
     if result is None:
         result = []
-        result.append(x)
-        return result
+    result.append(x)
+    return result
 ```
 
 接下来，调用它们：
@@ -220,10 +220,133 @@ RAII：Resource Acqusition Is Initialization，资源获取即初始化，即在
 
 假设文件名字叫做 `example.cpp`
 
-预处理：展开头文件和宏，得到 `example.ii`
-编译：生成汇编文件 `example.s`
-汇编：处理汇编代码，生成可重定位的目标文件 `example.o`
-链接：扫描所有的 `.o` 和库文件（静态库`.a`，动态库`.so`），把各个模块中未解析的符号（全局变量、函数等）与实际定义关联起来，并修正代码段和数据段中的相对地址，生成可执行 `ELF` 文件
-动态装载：操作系统将可执行文件及依赖的动态库映射到内存，完成运行时符号解析（`GOT/PLT`），最终移交控制权启动程序
+预处理：展开头文件和宏，得到 `example.ii`；
+编译：生成汇编文件 `example.s`；
+汇编：处理汇编代码，生成可重定位的目标文件 `example.o`；
+链接：扫描所有的 `.o` 和库文件（静态库`.a`，动态库`.so`），把各个模块中未解析的符号（全局变量、函数等）与实际定义关联起来，并修正代码段和数据段中的相对地址，生成可执行 `ELF` 文件；
+动态装载：操作系统将可执行文件及依赖的动态库映射到内存，完成运行时符号解析（`GOT/PLT`），最终移交控制权启动程序。
 
 ## 用 CMake 构建一个最小 C++ 库
+
+一个可用 `Cpp` 库应该包含暴露的 `.h` 头文件和生成的 `.a` 静态库或 `.so` 动态库，具体实现上如下：
+
+目录：
+
+```
+vector_ops/
+├── CMakeLists.txt
+├── include/vector_ops.h
+└── src/vector_ops.cpp
+```
+
+`CmakeLists.txt`:
+
+``` CMake
+cmake_minimum_required(VERSION 3.20)
+project(vector_ops LANGUAGES CXX)
+
+add_library(vector_ops src/vector_ops.cpp)
+target_include_directories(vector_ops PUBLIC include)
+target_complie_features(vector_ops PUBLIC cxx_std_20)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(vector_ops PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+```
+
+构建：
+
+``` Bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel
+```
+
+## 解释 shape、stride、dtype、device 和 lifetime 为什么属于跨语言接口
+
+首先解释一下这几个概念：`shape` 是对 N 维张量的一种描述，`stride` 是步长，例如，在一个 2 行 3 列的矩阵中，`shape` 等于 `(2, 3)`，`stride` 等于 `(3, 1)`，即 `offser = 3i + j`，可见，`shape` 和 `stride` 共同将多维张量的索引映射成成一维物理内存的索引；`dtype` 即 `data type`，数据类型，规定了内存位宽和对齐方式，`device` 是设备，如 `CPU`、`GPU` 等，`lifetime` 是生命周期，涉及所有权的问题。
+
+然后理解跨语言：不同语言的设计理念不同，因此各自擅长的事也不同，例如 `Python` 开发快，生态丰富，适合写编排层，而 `Cpp` 凭借出色的性能适合写系统层，因此在开发中，为了兼顾开发效率和性能，同时使用两种语言是必要的；但是两种语言的内存管理模式、对象等显然是不同的，`Python` 中对象是动态的，内存分配比较灵活，而 `Cpp` 中则依赖手动分配内存或智能指针等，需要明确的内存地址和字节偏移，因此当二者同时操作一块内存对象的时候，便会产生冲突。
+
+跨语言接口就是为了解决这个问题，通过 `shape` 等概念，设计一套统一的接口，协助两种语言写作开发。
+
+为了提升跨语言的性能，还需要引入零拷贝的概念。这里不详细展开。
+
+## 在 Linux 上查进程、资源占用、端口和动态库依赖
+
+查进程：
+
+``` Bash
+ps -ef    # e：显示所有进程，f：全格式显示
+htop      # top 的增强版
+```
+
+资源占用（CPU、内存、磁盘和网络）、端口：
+
+| 问题 | 常用命令 |
+| :--- | :--- |
+| CPU/负载 | `top`、`uptime`、`mpstat` |
+| 进程内存 | `ps`、`top`、`pmap -x PID` |
+| 系统内存 | `free -h`、`vmstat` |
+| 磁盘容量 | `df -h` |
+| 目录占用 | `du -sh PATH`、`du -h --max-depth=1` |
+| 文件 I/O | `iostat`、`iotop` |
+| 监听端口 | `ss -lntp` |
+| 连接测试 | `curl -v URL`、`nc -vz HOST PORT` |
+
+动态库依赖：
+
+| 工具 | 底层机制 | 核心命令 | 适用场景 |
+| :--- | :--- | :--- | :--- |
+| **readelf** | 静态解析 ELF 的 `.dynamic` 节 | `readelf -d ./app \| grep NEEDED` | 安全审计、交叉编译、查看直接依赖 |
+| **objdump** | 静态解析 ELF 私有头信息 | `objdump -p ./app \| grep NEEDED` | 替代 readelf 的静态分析工具 |
+| **ldd** | 调用动态链接器模拟加载 | `ldd ./app` | 查看完整依赖树及绝对路径，排查 not found |
+| **ldconfig** | 管理动态链接器缓存 | `ldconfig -p \| grep lib_name` | 查找系统已安装的动态库及其路径 |
+
+## 区分 NVIDIA Driver、CUDA Toolkit、CUDA Runtime 与 cuDNN
+
+原文中是这样说明的：
+
+> NVIDIA Driver：操作系统与 GPU 通信的基础；nvidia-smi 主要反映驱动状态；
+CUDA Toolkit：开发工具集合，包含 nvcc、头文件、调试/分析工具和库；
+CUDA Runtime/数学库：应用运行时加载的用户态组件；
+cuDNN：面向深度学习算子的独立加速库，不等于整个 CUDA。
+
+## 创建小而清晰的 Git 分支和提交，并在提交前检查 diff
+
+分支相关命令：
+
+``` Bash
+git branch                  # 查看全部本地分支，并标记当前分支
+git branch -v               # 查看全部本地分支，标记当前分支，并列出最新 commit messege
+git branch -a               # 查看全部本地和远程关联分支
+git branch --show-current   # 仅查看当前分支
+
+git branch <branch-name>    # 仅创建分支，不移动指针
+git siwtch -c <branch-name> # 创建分支并移动指针指向该分支
+
+git switch <branch-name>    # 切换分支
+
+git branch -d <branch-name> # 删除分支
+git branch -D <branch-name> # 强制删除分支，无视合并状态
+```
+
+检查 `diff`：
+
+``` Bash
+git diff                # 工作区 vs 暂存区
+git diff --staged       # 暂存区 vs HEAD
+git diff HEAD~1 HEAD    # HEAD~1 vs HEAD
+```
+
+## 能用“最小复现 + 环境快照 + 单变量实验”定位问题
+
+原文中给出的定位框架：
+> 遇到问题时按以下顺序记录：
+    期望行为：应该发生什么；
+    实际行为：完整报错、退出码、错误输出；
+    最小复现：最短命令、最小输入；
+    环境：代码提交、依赖版本、系统、硬件；
+    边界定位：数据、Python、C++、CUDA、驱动、网络中的哪一层；
+    单变量实验：每次只改变一项并记录结果。
+
+需实践检验。
