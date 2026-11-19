@@ -104,7 +104,7 @@ def timed(fn： Callable[P， R]) -> Callable[P, R]:
  
 @timed
 def preprocess(values: list[float]) -> list[float]:
-    return [value * 2 for vaule in values]
+    return [value * 2 for value in values]
 ```
 
 `@timed` 相当于 `preprocess = timed(preprocess)` ，由于 timed 返回一个 `wrapper` 函数，因此实际上 `preprocess` 函数被 `wrapper` 函数所“代理”。
@@ -120,7 +120,7 @@ from time import perf_counter
 
 @contextmanager
 def timer(name: str) -> Iterator[None]:
-    start = perf_counter
+    start = perf_counter()
     try:
         yield
     finally:
