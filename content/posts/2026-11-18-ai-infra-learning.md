@@ -46,7 +46,7 @@ def collect_bad(x: int, result: list[int] = []) -> list[int]:
     result.append(x)
     return result
  
-def collect_good(x: int, result: list[int] | None = None) - > list[int]:
+def collect_good(x: int, result: list[int] | None = None) -> list[int]:
     if result is None:
         result = []
     result.append(x)
@@ -91,7 +91,7 @@ from typing import ParamSpec,TypeVar
 P = ParamSpec("P")
 R = TypeVar("R")
 
-def timed(fn： Callable[P， R]) -> Callable[P, R]:
+def timed(fn: Callable[P， R]) -> Callable[P, R]:
     @wraps(fn)
     def wrapper(*args: P.args, **kwargs:P.kwargs) -> R:
         start = perf_counter()
@@ -109,7 +109,7 @@ def preprocess(values: list[float]) -> list[float]:
 
 `@timed` 相当于 `preprocess = timed(preprocess)` ，由于 timed 返回一个 `wrapper` 函数，因此实际上 `preprocess` 函数被 `wrapper` 函数所“代理”。
 
-具体流程是这样的：`preprocess = timed(preprocess)`，`timed` 传入 `preprocess` 这个函数，`@wraps(fn)` 保留 `preprocess` 的元信息，接着，`timed` 内部定义的 `wrapper`，由于其参数是 `*agrs` 和 `**kwargs`，因此，会直接将 `preporcess` 的参数传入，然后，由于闭包，`wrapper` 在 `return fn(...)` 的时候能找到外层的 `fn`，执行 `preprocess` 原内部的逻辑。
+具体流程是这样的：`preprocess = timed(preprocess)`，`timed` 传入 `preprocess` 这个函数，`@wraps(fn)` 保留 `preprocess` 的元信息，接着，`timed` 内部定义的 `wrapper`，由于其参数是 `*args` 和 `**kwargs`，因此，会直接将 `preprocess` 的参数传入，然后，由于闭包，`wrapper` 在 `return fn(...)` 的时候能找到外层的 `fn`，执行 `preprocess` 原内部的逻辑。
 
 一个上下文管理器（使用 @contextmanager 装饰器将函数对象变成可被 with 操作的对象）：
 
@@ -208,7 +208,7 @@ void optional(T* value);  // 指针可能为空，通常不用有对象
 
 ## 说明 RAII、`unique_ptr`、`shared_ptr` 各自解决什么问题
 
-RAII：Resource Acqusition Is Initialization，资源获取即初始化，即在构造时获取资源，在析构时释放资源。它解决的问题是：资源生命周期必须有清晰的边界。
+RAII：Resource Acquisition Is Initialization，资源获取即初始化，即在构造时获取资源，在析构时释放资源。它解决的问题是：资源生命周期必须有清晰的边界。
 
 具体来说，就是确保程序在正常退出或者抛出异常的时候，资源（如内存、文件句柄、网络 Socket，互斥锁等）都能够被确定性地释放。如果资源没有被释放，就会造成资源泄露，长期出现资源泄露，可能会造成内存枯竭以至于崩溃等问题。
 
@@ -247,7 +247,7 @@ project(vector_ops LANGUAGES CXX)
 
 add_library(vector_ops src/vector_ops.cpp)
 target_include_directories(vector_ops PUBLIC include)
-target_complie_features(vector_ops PUBLIC cxx_std_20)
+target_compile_features(vector_ops PUBLIC cxx_std_20)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(vector_ops PRIVATE -Wall -Wextra -Wpedantic)
@@ -263,7 +263,7 @@ cmake --build build --parallel
 
 ## 解释 shape、stride、dtype、device 和 lifetime 为什么属于跨语言接口
 
-首先解释一下这几个概念：`shape` 是对 N 维张量的一种描述，`stride` 是步长，例如，在一个 2 行 3 列的矩阵中，`shape` 等于 `(2, 3)`，`stride` 等于 `(3, 1)`，即 `offser = 3i + j`，可见，`shape` 和 `stride` 共同将多维张量的索引映射成成一维物理内存的索引；`dtype` 即 `data type`，数据类型，规定了内存位宽和对齐方式，`device` 是设备，如 `CPU`、`GPU` 等，`lifetime` 是生命周期，涉及所有权的问题。
+首先解释一下这几个概念：`shape` 是对 N 维张量的一种描述，`stride` 是步长，例如，在一个 2 行 3 列的矩阵中，`shape` 等于 `(2, 3)`，`stride` 等于 `(3, 1)`，即 `offset = 3i + j`，可见，`shape` 和 `stride` 共同将多维张量的索引映射成成一维物理内存的索引；`dtype` 即 `data type`，数据类型，规定了内存位宽和对齐方式，`device` 是设备，如 `CPU`、`GPU` 等，`lifetime` 是生命周期，涉及所有权的问题。
 
 然后理解跨语言：不同语言的设计理念不同，因此各自擅长的事也不同，例如 `Python` 开发快，生态丰富，适合写编排层，而 `Cpp` 凭借出色的性能适合写系统层，因此在开发中，为了兼顾开发效率和性能，同时使用两种语言是必要的；但是两种语言的内存管理模式、对象等显然是不同的，`Python` 中对象是动态的，内存分配比较灵活，而 `Cpp` 中则依赖手动分配内存或智能指针等，需要明确的内存地址和字节偏移，因此当二者同时操作一块内存对象的时候，便会产生冲突。
 
@@ -322,7 +322,7 @@ git branch -a               # 查看全部本地和远程关联分支
 git branch --show-current   # 仅查看当前分支
 
 git branch <branch-name>    # 仅创建分支，不移动指针
-git siwtch -c <branch-name> # 创建分支并移动指针指向该分支
+git switch -c <branch-name> # 创建分支并移动指针指向该分支
 
 git switch <branch-name>    # 切换分支
 
